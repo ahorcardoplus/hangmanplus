@@ -12,11 +12,13 @@ end
 
 post "/start" do
   if session[:phrase]
-    session["hangman"] = Hangman.new session[:phrase]
+    hangman = Hangman.new session[:phrase]
   else
-    session["hangman"] = Hangman.new
+    hangman = Hangman.new
   end
-  @remainig_attempts = 6
+  @remainig_attempts = hangman.remaining_fail_attempts()
+
+  session["hangman"] = hangman
   erb :game
 end
 
@@ -25,11 +27,7 @@ post "/guess" do
   hangman = session["hangman"]
   @message = hangman.guess(letter)
   @missed_letters = hangman.missed_letters()
+  @remainig_attempts = hangman.remaining_fail_attempts()
 
-  if @message == "miss"
-    @remainig_attempts = 5
-  else 
-    @remainig_attempts = 6
-  end
   erb :game
 end
