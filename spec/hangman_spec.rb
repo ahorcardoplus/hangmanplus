@@ -99,4 +99,11 @@ describe Hangman do
     	result = hangman.guess('z')
     	expect(result).to eq "miss"
     end
+
+    it "receives a non alphabetic character it should return not a valid character" do 
+    	hangman = Hangman.new "Chao jose"
+    	result = hangman.guess('%')
+    	expect(result).to eq "not a valid character"
+    end
+
 end
