@@ -37,7 +37,7 @@ class Hangman
 	end
 
     def guess(letter)
-        if (letter =~ /^[a-zA-Z]+$/).nil?
+        if (letter =~ /^[a-zA-ZñÑ]+$/).nil?
             return "not a valid character"
         end
 

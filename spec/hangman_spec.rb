@@ -228,4 +228,14 @@ describe Hangman do
         expect(hangman.show_dashes).to eq "_ _ _ _ _    _ _ _ _ _ "
     end
 
+    it "able to enter ñ letter" do
+        hangman = Hangman.new "Hello world"
+        expect(hangman.guess('ñ')).to eq "miss"
+    end
+
+    # it "able to enter ñ letter and replace" do
+    #     hangman = Hangman.new "Piña"
+    #     expect(hangman.guess('ñ')).to eq "excellent!"
+    #     expect(hangman.show_dashes).to eq "_ _ ñ _"
+    # end
 end
