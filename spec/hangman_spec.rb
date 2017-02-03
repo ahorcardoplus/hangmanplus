@@ -18,6 +18,14 @@ describe Hangman do
 		expect(hangman_game.phrase).not_to eq ""
 		expect(Hangman::PHRASES).to include(hangman_game.phrase)
 	end
+
+	it "initialize with nil phrase it should return a random phrase" do
+		hangman_game = Hangman.new
+		
+		expect(hangman_game.phrase).to be_kind_of(String)
+		expect(hangman_game.phrase).not_to eq ""
+		expect(Hangman::PHRASES).to include(hangman_game.phrase)
+	end
     
     it "receives an a and returns _ _ a _  _ _ _ _" do 
     	hangman = Hangman.new "Chao jose"

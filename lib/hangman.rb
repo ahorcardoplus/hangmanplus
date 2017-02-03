@@ -11,8 +11,13 @@ class Hangman
     	self.new PHRASES[phrase_index]
     end
 
-	def initialize phrase
-		@phrase = phrase
+	def initialize phrase = nil
+        if phrase.nil?
+            phrase_index = rand(PHRASES.length()-1)
+            @phrase = PHRASES[phrase_index]
+        else 
+		  @phrase = phrase
+        end
         @correct_guesses = []
 	end
 
