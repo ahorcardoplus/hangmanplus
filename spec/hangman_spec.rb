@@ -145,4 +145,36 @@ describe Hangman do
         missed_letters = hangman.missed_letters()
         expect(missed_letters).to eq "x"
     end
+
+    it "when a game starts I have 6 remaining fail attempts" do
+        hangman = Hangman.new "Hello world"
+        expect(hangman.remaining_fail_attempts).to eq 6
+    end
+
+    it "when a game has started and I enter a miss letter I should have 5 remaining fail attempts" do
+        hangman = Hangman.new "Hello world"
+        hangman.guess("x")
+        expect(hangman.remaining_fail_attempts).to eq 5
+    end
+
+    it "when a game has started and I enter twice the same miss letter I should have 5 remaining fail attempts" do
+        hangman = Hangman.new "Hello world"
+        hangman.guess("x")
+        hangman.guess("x")
+        expect(hangman.remaining_fail_attempts).to eq 5
+    end
+
+    it "when a game has started and I enter 7 different miss letters I should have 0 remaining fail attempts" do
+        hangman = Hangman.new "Hello world"
+        hangman.guess("x")
+        hangman.guess("y")
+        hangman.guess("z")
+        hangman.guess("t")
+        hangman.guess("u")
+        hangman.guess("v")
+        hangman.guess("w")
+        hangman.guess("m")
+        expect(hangman.remaining_fail_attempts).to eq 0
+    end
+
 end
