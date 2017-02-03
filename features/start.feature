@@ -9,3 +9,8 @@ Scenario: I should see the welcome screen
 Scenario: I should see the dashes after I started the game
   Given I started a game
   Then I should see the text "_ _ _  _ _ _ _ _"
+
+Scenario: I should see the dashes when the phrase change
+  Given I started a game
+  When I change the phrase
+  Then I should see the text "_ _ _  _ _ _ _ _ _"
