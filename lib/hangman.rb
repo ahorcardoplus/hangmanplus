@@ -5,7 +5,10 @@ class Hangman
         "mas vale pajaro en mano que cien volando",
     	"al que madruga dios lo ayuda",
     	"no por tanto madrugar amanece mas temprano",
-    	"mas sabe el diablo por viejo que por diablo"]
+    	"mas sabe el diablo por viejo que por diablo"
+    ]
+
+    ACCENTS = {"á" => "a", "Á" => "a", "é" => "e", "É" => "e", "í" => "i", "Í" => "i", "ó" => "o", "Ó" => "o", "Ú" => "u", "ú" => "u"}
 
     def self.random_game
     	phrase_index = rand(PHRASES.length()-1)
@@ -37,7 +40,11 @@ class Hangman
 	end
 
     def guess(letter)
-        if (letter =~ /^[a-zA-ZñÑ]+$/).nil?
+        unless ACCENTS[letter].nil?
+            letter = ACCENTS[letter]
+        end
+
+        if (letter =~ /^[a-zA-ZñÑáÁ]+$/).nil?
             return "not a valid character"
         end
 

@@ -245,4 +245,15 @@ describe Hangman do
         expect(hangman.show_dashes).to eq "_ _ Ñ _ "
     end
 
+    it "able to enter á letter and replace it" do
+        hangman = Hangman.new "arbol"
+        expect(hangman.guess('á')).to eq "excellent!"
+        expect(hangman.show_dashes).to eq "a _ _ _ _ "
+    end
+
+    it "able to enter Á letter and replace it" do
+        hangman = Hangman.new "arbol"
+        expect(hangman.guess('Á')).to eq "excellent!"
+        expect(hangman.show_dashes).to eq "a _ _ _ _ "
+    end
 end
