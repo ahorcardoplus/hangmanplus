@@ -6,9 +6,9 @@
 <body>
   <div align="center">
     <h1>Welcome to Hangman Plus</h1>
-    <h3><%= @remainig_attempts %></h3>
+    <h3>Remaining attempts: <%= @remainig_attempts %></h3>
 
-    <pre> <%= session["hangman"].show_dashes %></pre>
+    <pre style="font-size: 20px; color: blue;"> <%= session["hangman"].show_dashes %></pre>
     <br>
 
     <form action="/guess" method="POST">
