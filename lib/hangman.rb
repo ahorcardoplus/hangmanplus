@@ -18,7 +18,7 @@ class Hangman
 
 	def show_dashes
         @phrase.chars.map { |c| 
-            if @correct_guesses.include? c
+            if @correct_guesses.include? c.downcase
                 c + ' '
             else
                 c != ' ' ? '_ ' : ' ' 
@@ -27,8 +27,8 @@ class Hangman
 	end
 
     def guess(letter)
-        if @phrase.include?(letter)
-            @correct_guesses << letter
+        if @phrase.downcase.include?(letter.downcase)
+            @correct_guesses << letter.downcase
         end
     end
 end
