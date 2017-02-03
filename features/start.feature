@@ -14,3 +14,8 @@ Scenario: I should see the dashes when the phrase change
   Given I started a game
   When I change the phrase
   Then I should see the text "_ _ _  _ _ _ _ _ _"
+
+Scenario: When I type a letter that is present in the text I should see it replace the dashes
+  Given I started a game
+  When The phrase is "Hello world" and I type "h"
+  Then I should see the text "H _ _ _ _  _ _ _ _ _"

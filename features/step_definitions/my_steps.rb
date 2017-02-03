@@ -18,3 +18,8 @@ end
 When(/^I change the phrase$/) do
   click_button("Change Phrase")
 end
+
+When(/^The phrase is "([^"]*)" and I type "([^"]*)"$/) do |phrase, letter|
+  fill_in("letter", :with => letter)
+  click_button("Guess")
+end
