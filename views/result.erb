@@ -4,10 +4,17 @@
   <title>Results</title>
 </head>
 <body>
+<div align="center">
   <h1>You <%= session["hangman"].game_status.to_s.upcase %></h1>
+  
   <h3>Phrase:
-  <%= session["hangman"].phrase %></h3>
+    <span style="color: blue;">
+    <%= session["hangman"].phrase %></span>
+  </h3>
+
   <h3>Remaining failed attempts:
-  <%= session["hangman"].remaining_fail_attempts %></h3>
+    <%= session["hangman"].remaining_fail_attempts %>   
+  </h3>
+</div>
 </body>
 </html>
