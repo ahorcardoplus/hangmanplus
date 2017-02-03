@@ -29,3 +29,14 @@ Scenario: When I type a letter that is not present in the text I should see 5 re
   Given I started a game with phrase "The Animal"
   When I type "o"
   Then I should see the text "5"
+
+Scenario: When I type a letter that is not present in the text I should see Missed letters: o
+  Given I started a game with phrase "The Animal"
+  When I type "o"
+  Then I should see the text "Missed letters: o"
+
+Scenario: When I type 2 letterr that are not present in the text I should see Missed letters: o,z
+  Given I started a game with phrase "The Animal"
+  When I type "o"
+  And I type "z"
+  Then I should see the text "Missed letters: o,z"

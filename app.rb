@@ -24,6 +24,8 @@ post "/guess" do
   letter = params[:letter]
   hangman = session["hangman"]
   @message = hangman.guess(letter)
+  @missed_letters = hangman.missed_letters()
+
   if @message == "miss"
     @remainig_attempts = 5
   else 
