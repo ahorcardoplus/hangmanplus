@@ -16,6 +16,7 @@ describe Hangman do
 		
 		expect(hangman_game.phrase).to be_kind_of(String)
 		expect(hangman_game.phrase).not_to eq ""
+		expect(Hangman::PHRASES).to include(hangman_game.phrase)
 	end
 
 end
