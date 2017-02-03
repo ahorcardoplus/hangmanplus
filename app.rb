@@ -22,6 +22,7 @@ end
 post "/guess" do
   letter = params[:letter]
   hangman = session["hangman"]
-  hangman.guess(letter)
+  @message = hangman.guess(letter)
+
   erb :game
 end
