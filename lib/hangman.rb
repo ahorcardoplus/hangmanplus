@@ -20,6 +20,7 @@ class Hangman
         end
         @correct_guesses = []
         @missed_letters = []
+        @remaining_fail_attempts = 6
 	end
 
 	def show_dashes
@@ -48,6 +49,7 @@ class Hangman
             letter_to_save = letter.downcase
             unless @missed_letters.include?(letter_to_save)
                 @missed_letters << letter_to_save
+                @remaining_fail_attempts -= 1 if @remaining_fail_attempts > 0 
             end
             return "miss"
         end
@@ -57,5 +59,9 @@ class Hangman
 
     def missed_letters
         return @missed_letters.join(',')
+    end
+
+    def remaining_fail_attempts
+        @remaining_fail_attempts
     end
 end
