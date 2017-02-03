@@ -78,6 +78,15 @@ class Hangman
     def guess_by_word(word)
         if @phrase.downcase.split.include?(word.downcase)
             @correct_guesses_by_word << word.downcase
+            return "excellent!"
+        else
+            word_to_save = word.downcase
+            unless @missed_letters.include?(word_to_save)
+                @missed_letters << word_to_save
+                @remaining_fail_attempts -= 1 if @remaining_fail_attempts > 0 
+                @game_status = :lost if @remaining_fail_attempts == 0
+            end
+            return "miss"
         end
     end
 end

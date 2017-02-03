@@ -206,6 +206,22 @@ describe Hangman do
     #     expect(hangman.show_dashes).to eq "H e l l o    _ _ _ _ _"
     # end
 
+    it "decreases the remaning attempts when not present word is entered" do
+        hangman = Hangman.new "Hello world"
+        hangman.guess('cosa')
+        expect(hangman.remaining_fail_attempts).to eq 5
+    end
+
+    it "decreases the remaning attempts when not present word is entered" do
+        hangman = Hangman.new "Hello world"
+        expect(hangman.guess('cosa')).to eq "miss"
+    end
+
+    it "decreases the remaning attempts when not present word is entered" do
+        hangman = Hangman.new "Hello world"
+        expect(hangman.guess('hello')).to eq "excellent!"
+    end
+
     it "cannot enter a word with spaces" do
         hangman = Hangman.new "Hello world"
         expect(hangman.guess('Hello wo')).to eq "not a valid character"
