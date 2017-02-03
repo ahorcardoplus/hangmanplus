@@ -26,4 +26,19 @@ describe Hangman do
     	expect(hangman.show_dashes).to eq "_ _ a _  _ _ _ _ "
     end	
 
+    it "receives letters" do 
+    	hangman = Hangman.new "Chao jose"
+
+    	hangman.guess('o')
+    	expect(hangman.show_dashes).to eq "_ _ _ o  _ o _ _ "
+    end
+
+    it "receives letters" do 
+    	hangman = Hangman.new "Chao jose"
+
+    	hangman.guess('o')
+    	hangman.guess('a')
+    	expect(hangman.show_dashes).to eq "_ _ a o  _ o _ _ "
+    end
+
 end

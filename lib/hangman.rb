@@ -17,10 +17,13 @@ class Hangman
 	end
 
 	def show_dashes
-        if @correct_guesses.include?('a')
-            return "_ _ a _  _ _ _ _ "
-        end
-        @phrase.chars.map {|c| c != ' ' ? '_ ' : ' '}.join
+        @phrase.chars.map { |c| 
+            if @correct_guesses.include? c
+                c + ' '
+            else
+                c != ' ' ? '_ ' : ' ' 
+            end
+        }.join
 	end
 
     def guess(letter)
