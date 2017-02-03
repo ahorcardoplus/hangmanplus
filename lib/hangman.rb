@@ -21,6 +21,7 @@ class Hangman
         @correct_guesses = []
         @missed_letters = []
         @remaining_fail_attempts = 6
+        @game_status = 'playing'
 	end
 
 	def show_dashes
@@ -50,6 +51,7 @@ class Hangman
             unless @missed_letters.include?(letter_to_save)
                 @missed_letters << letter_to_save
                 @remaining_fail_attempts -= 1 if @remaining_fail_attempts > 0 
+                # @game_status = failed if @remaining_fail_attempts == 0
             end
             return "miss"
         end
