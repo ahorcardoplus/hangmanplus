@@ -26,7 +26,7 @@ class Hangman
             if @correct_guesses.include? c.downcase
                 c + ' '
             else
-                c != ' ' ? '_ ' : ' ' 
+                c != ' ' ? '_ ' : '   ' 
             end
         }.join
 	end
