@@ -3,22 +3,32 @@ require './config'
 require './lib/hangman'
 
 get '/' do
+  if params["phrase"]
+    session[:phrase] = params["phrase"]
+  end
+
   erb :index
 end
 
 post "/start" do
-  @hangman = Hangman.random_game
-  @dashes = @hangman.show_dashes
+  if session[:phrase]
+    session["hangman"] = Hangman.new session[:phrase]
+  else
+    session["hangman"] = Hangman.new
+  end
   erb :game
 end
 
 post "/guess" do
-  letter = param[:letter]
-  "H _ _ _ _  _ _ _ _ _"
+  letter = params[:letter]
+  hangman = session["hangman"]
+  hangman.guess(letter)
+  erb :game
 end
 
 post "/reset" do
-  @hangman = Hangman.random_game
-  @dashes = @hangman.show_dashes
+  if params["env"] == "test"
+    session["hangman"] = Hangman.new "the animal"
+  end
   erb :game
 end
