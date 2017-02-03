@@ -25,10 +25,3 @@ post "/guess" do
   hangman.guess(letter)
   erb :game
 end
-
-post "/reset" do
-  if params["env"] == "test"
-    session["hangman"] = Hangman.new "the animal"
-  end
-  erb :game
-end
