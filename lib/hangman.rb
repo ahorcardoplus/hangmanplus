@@ -20,6 +20,7 @@ class Hangman
 		  @phrase = phrase
         end
         @correct_guesses = []
+        @correct_guesses_by_word = [] 
         @missed_letters = []
         @remaining_fail_attempts = 6
         @game_status = :playing
@@ -36,12 +37,12 @@ class Hangman
 	end
 
     def guess(letter)
-        if letter.length > 1 
+        if (letter =~ /^[a-zA-Z]+$/).nil?
             return "not a valid character"
         end
 
-        if (letter =~ /[a-z,A-Z]/).nil?
-            return "not a valid character"
+        if letter.length > 1 
+            return guess_by_word(letter)
         end
 
         if @phrase.downcase.include?(letter.downcase)
@@ -71,5 +72,12 @@ class Hangman
 
     def game_status
         @game_status
+    end
+
+    private
+    def guess_by_word(word)
+        if @phrase.downcase.split.include?(word.downcase)
+            @correct_guesses_by_word << word.downcase
+        end
     end
 end

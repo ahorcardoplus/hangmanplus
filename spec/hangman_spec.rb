@@ -82,12 +82,6 @@ describe Hangman do
         expect(hangman.show_dashes).to eq "_ _ _ _    _ _ _ _ "
     end
 
-    it "receives two letters it should do nothing" do 
-        hangman = Hangman.new "Chao jose"
-        result = hangman.guess('se')
-        expect(result).to eq "not a valid character"
-    end
-
     it "receives one letters in phrase it should be excellent" do 
         hangman = Hangman.new "Chao jose"
         result = hangman.guess('s')
@@ -203,6 +197,19 @@ describe Hangman do
         hangman.guess("r")
         hangman.guess("d")        
         expect(hangman.game_status).to eq :won
+    end
+
+
+    # it "can enter a word that is present in the phrase" do
+    #     hangman = Hangman.new "Hello world"
+    #     hangman.guess('Hello')
+    #     expect(hangman.show_dashes).to eq "H e l l o    _ _ _ _ _"
+    # end
+
+    it "cannot enter a word with spaces" do
+        hangman = Hangman.new "Hello world"
+        expect(hangman.guess('Hello wo')).to eq "not a valid character"
+        expect(hangman.show_dashes).to eq "_ _ _ _ _    _ _ _ _ _ "
     end
 
 end
