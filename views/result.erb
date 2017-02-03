@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Results</title>
+</head>
+<body>
+  <h1>You <%= session["hangman"].game_status.to_s.upcase %></h1>
+  <h3>Phrase:
+  <%= session["hangman"].phrase %></h3>
+  <h3>Remaining failed attempts:
+  <%= session["hangman"].remaining_fail_attempts %></h3>
+</body>
+</html>
