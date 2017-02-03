@@ -14,3 +14,7 @@ Given(/^I started a game$/) do
   visit "/"
   click_button("Start")
 end
+
+When(/^I change the phrase$/) do
+  click_button("Change Phrase")
+end
