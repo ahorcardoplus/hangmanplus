@@ -16,6 +16,6 @@ class Hangman
 	end
 
 	def show_dashes
-		@phrase.chars.map {|c| c != ' ' ? '_' : ' '}.join
+		@phrase.chars.map {|c| c != ' ' ? '_ ' : ' '}.join
 	end
 end
