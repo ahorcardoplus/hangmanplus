@@ -18,6 +18,12 @@ describe Hangman do
 		expect(hangman_game.phrase).not_to eq ""
 		expect(Hangman::PHRASES).to include(hangman_game.phrase)
 	end
+    
+    it "receives letters" do 
+    	hangman = Hangman.new "Chao jose"
 
+    	hangman.guess('a')
+    	expect(hangman.show_dashes).to eq "_ _ a _  _ _ _ _ "
+    end	
 
 end

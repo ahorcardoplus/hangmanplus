@@ -13,9 +13,19 @@ class Hangman
 
 	def initialize phrase
 		@phrase = phrase
+        @correct_guesses = []
 	end
 
 	def show_dashes
-		@phrase.chars.map {|c| c != ' ' ? '_ ' : ' '}.join
+        if @correct_guesses.include?('a')
+            return "_ _ a _  _ _ _ _ "
+        end
+        @phrase.chars.map {|c| c != ' ' ? '_ ' : ' '}.join
 	end
+
+    def guess(letter)
+        if @phrase.include?(letter)
+            @correct_guesses << letter
+        end
+    end
 end
