@@ -7,7 +7,7 @@
   <h1>Welcome to Hangman Plus</h1>
 
   <div align="center">
-    <%= @dashes %>
+    <%= session["hangman"].show_dashes %>
   </div>
 
   <form action="/guess" method="POST">
@@ -17,6 +17,7 @@
   </form>
 
   <form action="/reset" method="POST">
+    <input type="hidden" name="env" value="">
     <input type="submit" name="reset" value="Change Phrase">
   </form>
 </body>
