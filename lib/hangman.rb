@@ -36,6 +36,10 @@ class Hangman
             return "not a valid character"
         end
 
+        if (letter =~ /[a-z,A-Z]/).nil?
+            return "not a valid character"
+        end
+
         if @phrase.downcase.include?(letter.downcase)
             @correct_guesses << letter.downcase
             return "excellent!"
