@@ -177,15 +177,32 @@ describe Hangman do
         expect(hangman.remaining_fail_attempts).to eq 0
     end
 
-    # it "when a game has started and I enter 6 different miss letters, I can't play anymore" do
-    #     hangman = Hangman.new "Hello world"
-    #     hangman.guess("x")
-    #     hangman.guess("y")
-    #     hangman.guess("z")
-    #     hangman.guess("t")
-    #     hangman.guess("m")
-    #     hangman.guess("p")        
-    #     expect(hangman.game_status).to eq 'failed'
-    # end
+    it "when a game has started game status is 'playing'" do
+        hangman = Hangman.new "Hello world"
+        expect(hangman.game_status).to eq :playing
+    end
+
+    it "when a game has started and I enter 6 different miss letters, I can't play anymore" do
+        hangman = Hangman.new "Hello world"
+        hangman.guess("x")
+        hangman.guess("y")
+        hangman.guess("z")
+        hangman.guess("t")
+        hangman.guess("m")
+        hangman.guess("p")        
+        expect(hangman.game_status).to eq :lost
+    end
+
+    it "when a game has started and all the letters are discovered'" do
+        hangman = Hangman.new "Hello world"
+        hangman.guess("H")
+        hangman.guess("e")
+        hangman.guess("l")
+        hangman.guess("o")
+        hangman.guess("w")
+        hangman.guess("r")
+        hangman.guess("d")        
+        expect(hangman.game_status).to eq :won
+    end
 
 end

@@ -1,7 +1,8 @@
 class Hangman
     attr_reader :phrase
 
-    PHRASES = ["mas vale pajaro en mano que cien volando",
+    PHRASES = [
+        "mas vale pajaro en mano que cien volando",
     	"al que madruga dios lo ayuda",
     	"no por tanto madrugar amanece mas temprano",
     	"mas sabe el diablo por viejo que por diablo"]
@@ -21,7 +22,7 @@ class Hangman
         @correct_guesses = []
         @missed_letters = []
         @remaining_fail_attempts = 6
-        @game_status = 'playing'
+        @game_status = :playing
 	end
 
 	def show_dashes
@@ -45,13 +46,14 @@ class Hangman
 
         if @phrase.downcase.include?(letter.downcase)
             @correct_guesses << letter.downcase
+            @game_status = :won if !show_dashes().include? '_'
             return "excellent!"
         else
             letter_to_save = letter.downcase
             unless @missed_letters.include?(letter_to_save)
                 @missed_letters << letter_to_save
                 @remaining_fail_attempts -= 1 if @remaining_fail_attempts > 0 
-                # @game_status = failed if @remaining_fail_attempts == 0
+                @game_status = :lost if @remaining_fail_attempts == 0
             end
             return "miss"
         end
@@ -65,5 +67,9 @@ class Hangman
 
     def remaining_fail_attempts
         @remaining_fail_attempts
+    end
+
+    def game_status
+        @game_status
     end
 end
