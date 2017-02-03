@@ -1,7 +1,7 @@
 class Hangman
     attr_reader :phrase
 
-    PHRASES = ["mas vale pajaro en mano que 100 volando",
+    PHRASES = ["mas vale pajaro en mano que cien volando",
     	"al que madruga dios lo ayuda",
     	"no por tanto madrugar amanece mas temprano",
     	"mas sabe el diablo por viejo que por diablo"]
@@ -32,8 +32,17 @@ class Hangman
 	end
 
     def guess(letter)
+        if letter.length > 1 
+            return "not a valid character"
+        end
+
         if @phrase.downcase.include?(letter.downcase)
             @correct_guesses << letter.downcase
+            return "excellent!"
+        else
+            return "miss"
         end
+
+        return "unexepected error"
     end
 end

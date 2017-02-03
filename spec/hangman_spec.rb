@@ -75,4 +75,28 @@ describe Hangman do
     	hangman.guess('c')
     	expect(hangman.show_dashes).to eq "C _ _ _  _ _ _ _ "
     end
+
+   	it "receives a number and it should do nothing" do 
+    	hangman = Hangman.new "Chao jose"
+    	hangman.guess('6')
+    	expect(hangman.show_dashes).to eq "_ _ _ _  _ _ _ _ "
+    end
+
+    it "receives two letters it should do nothing" do 
+    	hangman = Hangman.new "Chao jose"
+    	result = hangman.guess('se')
+    	expect(result).to eq "not a valid character"
+    end
+
+    it "receives one letters in phrase it should be excellent" do 
+    	hangman = Hangman.new "Chao jose"
+    	result = hangman.guess('s')
+    	expect(result).to eq "excellent!"
+    end
+
+    it "receives one letter not in phrase it should be miss" do 
+    	hangman = Hangman.new "Chao jose"
+    	result = hangman.guess('z')
+    	expect(result).to eq "miss"
+    end
 end
