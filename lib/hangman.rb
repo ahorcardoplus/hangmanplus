@@ -19,6 +19,7 @@ class Hangman
 		  @phrase = phrase
         end
         @correct_guesses = []
+        @missed_letters = []
 	end
 
 	def show_dashes
@@ -44,9 +45,17 @@ class Hangman
             @correct_guesses << letter.downcase
             return "excellent!"
         else
+            letter_to_save = letter.downcase
+            unless @missed_letters.include?(letter_to_save)
+                @missed_letters << letter_to_save
+            end
             return "miss"
         end
 
         return "unexepected error"
+    end
+
+    def missed_letters
+        return @missed_letters.join(',')
     end
 end
