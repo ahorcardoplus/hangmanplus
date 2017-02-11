@@ -9,6 +9,7 @@ class Hangman
     ]
 
     ACCENTS = {"á" => "a", "Á" => "a", "é" => "e", "É" => "e", "í" => "i", "Í" => "i", "ó" => "o", "Ó" => "o", "Ú" => "u", "ú" => "u"}
+    PLACEHOLDER = '_'
 
     def self.random_game
     	phrase_index = rand(PHRASES.length()-1)
@@ -34,7 +35,7 @@ class Hangman
             if @correct_guesses.include? c.downcase
                 c
             else
-                c != ' ' ? '_' : ' '
+                c != ' ' ? PLACEHOLDER : ' '
             end
         }.join
 
@@ -42,14 +43,14 @@ class Hangman
           if @correct_guesses_by_word.include? word.downcase
             word
           else
-            '_' * word.length
+            PLACEHOLDER * word.length
           end
         }.join(' ')
 
         by_letter.chars.zip(by_word.chars).map { |a, b|
           if a == b
             a == ' ' ? '   ' : a + ' '
-          elsif b == '_'
+          elsif b == PLACEHOLDER
             a + ' '
           else
             b + ' '
@@ -72,7 +73,7 @@ class Hangman
 
         if @phrase.downcase.include?(letter.downcase)
             @correct_guesses << letter.downcase
-            @game_status = :won if !show_dashes().include? '_'
+            @game_status = :won if !show_dashes().include? PLACEHOLDER
             return "excellent!"
         else
             letter_to_save = letter.downcase
