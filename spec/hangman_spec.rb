@@ -13,7 +13,7 @@ describe Hangman do
 
     it "return random phrase" do
         hangman_game = Hangman.random_game
-        
+
         expect(hangman_game.phrase).to be_kind_of(String)
         expect(hangman_game.phrase).not_to eq ""
         expect(Hangman::PHRASES).to include(hangman_game.phrase)
@@ -21,27 +21,27 @@ describe Hangman do
 
     it "initialize with nil phrase it should return a random phrase" do
         hangman_game = Hangman.new
-        
+
         expect(hangman_game.phrase).to be_kind_of(String)
         expect(hangman_game.phrase).not_to eq ""
         expect(Hangman::PHRASES).to include(hangman_game.phrase)
     end
-    
-    it "receives an a and returns _ _ a _    _ _ _ _" do 
+
+    it "receives an a and returns _ _ a _    _ _ _ _" do
         hangman = Hangman.new "Chao jose"
 
         hangman.guess('a')
         expect(hangman.show_dashes).to eq "_ _ a _    _ _ _ _ "
-    end 
+    end
 
-    it "receives an o" do 
+    it "receives an o" do
         hangman = Hangman.new "Chao jose"
 
         hangman.guess('o')
         expect(hangman.show_dashes).to eq "_ _ _ o    _ o _ _ "
     end
 
-    it "receives two letters" do 
+    it "receives two letters" do
         hangman = Hangman.new "Chao jose"
 
         hangman.guess('o')
@@ -49,14 +49,14 @@ describe Hangman do
         expect(hangman.show_dashes).to eq "_ _ a o    _ o _ _ "
     end
 
-    it "receives a wrong letter and returns all dashed" do 
+    it "receives a wrong letter and returns all dashed" do
         hangman = Hangman.new "Chao jose"
 
         hangman.guess('z')
         expect(hangman.show_dashes).to eq "_ _ _ _    _ _ _ _ "
     end
 
-    it "receives a wrong letter and a correct one" do 
+    it "receives a wrong letter and a correct one" do
         hangman = Hangman.new "Chao jose"
 
         hangman.guess('z')
@@ -64,13 +64,13 @@ describe Hangman do
         expect(hangman.show_dashes).to eq "_ _ _ _    j _ _ _ "
     end
 
-    it "receives a correct uppercase letter and it should replace it" do 
+    it "receives a correct uppercase letter and it should replace it" do
         hangman = Hangman.new "Chao jose"
         hangman.guess('C')
         expect(hangman.show_dashes).to eq "C _ _ _    _ _ _ _ "
     end
 
-    it "receives a correct uppercase letter and it should replace it" do 
+    it "receives a correct uppercase letter and it should replace it" do
         hangman = Hangman.new "Chao jose"
         hangman.guess('c')
         expect(hangman.show_dashes).to eq "C _ _ _    _ _ _ _ "
@@ -82,47 +82,47 @@ describe Hangman do
         expect(hangman.show_dashes).to eq "_ _ _ _    _ _ _ _ "
     end
 
-    it "receives one letters in phrase it should be excellent" do 
+    it "receives one letters in phrase it should be excellent" do
         hangman = Hangman.new "Chao jose"
         result = hangman.guess('s')
         expect(result).to eq "excellent!"
     end
 
-    it "receives one letter not in phrase it should be miss" do 
+    it "receives one letter not in phrase it should be miss" do
         hangman = Hangman.new "Chao jose"
         result = hangman.guess('z')
         expect(result).to eq "miss"
     end
 
-    it "receives a non alphabetic character it should return not a valid character" do 
+    it "receives a non alphabetic character it should return not a valid character" do
         hangman = Hangman.new "Chao jose"
         result = hangman.guess('%')
         expect(result).to eq "not a valid character"
     end
 
-    it "receives not present letter it should return not present letter in missed letters" do 
+    it "receives not present letter it should return not present letter in missed letters" do
         hangman = Hangman.new "Chao jose"
         result = hangman.guess('z')
         missed_letters = hangman.missed_letters()
         expect(missed_letters).to eq "z"
     end
 
-    it "receives not present letter it should return not present letter in missed letters" do 
+    it "receives not present letter it should return not present letter in missed letters" do
         hangman = Hangman.new "Chao jose"
         result = hangman.guess('X')
         missed_letters = hangman.missed_letters()
         expect(missed_letters).to eq "x"
     end
 
-    it "receives 2 not present letters it should return all not present letter in missed letters" do 
+    it "receives 2 not present letters it should return all not present letter in missed letters" do
         hangman = Hangman.new "Chao jose"
         result = hangman.guess('X')
         result = hangman.guess('Y')
         missed_letters = hangman.missed_letters()
         expect(missed_letters).to eq "x,y"
     end
-    
-    it "receives 2 not present letters and one present letter it should return not present letter in missed letters" do 
+
+    it "receives 2 not present letters and one present letter it should return not present letter in missed letters" do
         hangman = Hangman.new "Chao jose"
         result = hangman.guess('X')
         result = hangman.guess('Y')
@@ -131,7 +131,7 @@ describe Hangman do
         expect(missed_letters).to eq "x,y"
     end
 
-    it "receives 3 times the same not present letter it should return one time the miss letter" do 
+    it "receives 3 times the same not present letter it should return one time the miss letter" do
         hangman = Hangman.new "Chao jose"
         result = hangman.guess('x')
         result = hangman.guess('x')
@@ -183,7 +183,7 @@ describe Hangman do
         hangman.guess("z")
         hangman.guess("t")
         hangman.guess("m")
-        hangman.guess("p")        
+        hangman.guess("p")
         expect(hangman.game_status).to eq :lost
     end
 
@@ -195,16 +195,24 @@ describe Hangman do
         hangman.guess("o")
         hangman.guess("w")
         hangman.guess("r")
-        hangman.guess("d")        
+        hangman.guess("d")
         expect(hangman.game_status).to eq :won
     end
 
 
-    # it "can enter a word that is present in the phrase" do
-    #     hangman = Hangman.new "Hello world"
-    #     hangman.guess('Hello')
-    #     expect(hangman.show_dashes).to eq "H e l l o    _ _ _ _ _"
-    # end
+     it "can enter a word that is present in the phrase" do
+         hangman = Hangman.new "Hello world"
+         hangman.guess('Hello')
+         expect(hangman.show_dashes).to eq "H e l l o    _ _ _ _ _ "
+     end
+
+     it "combines words and letter gusses" do
+         hangman = Hangman.new "Hello world"
+         hangman.guess('Hello')
+         hangman.guess('o')
+
+         expect(hangman.show_dashes).to eq "H e l l o    _ o _ _ _ "
+     end
 
     it "decreases the remaning attempts when not present word is entered" do
         hangman = Hangman.new "Hello world"

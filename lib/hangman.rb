@@ -19,23 +19,41 @@ class Hangman
         if phrase.nil?
             phrase_index = rand(PHRASES.length()-1)
             @phrase = PHRASES[phrase_index]
-        else 
+        else
 		  @phrase = phrase
         end
         @correct_guesses = []
-        @correct_guesses_by_word = [] 
+        @correct_guesses_by_word = []
         @missed_letters = []
         @remaining_fail_attempts = 6
         @game_status = :playing
 	end
 
 	def show_dashes
-        @phrase.chars.map { |c| 
+        by_letter = @phrase.chars.map { |c|
             if @correct_guesses.include? c.downcase
-                c + ' '
+                c
             else
-                c != ' ' ? '_ ' : '   ' 
+                c != ' ' ? '_' : ' '
             end
+        }.join
+
+        by_word = @phrase.split.map { |word|
+          if @correct_guesses_by_word.include? word.downcase
+            word
+          else
+            '_' * word.length
+          end
+        }.join(' ')
+
+        by_letter.chars.zip(by_word.chars).map { |a, b|
+          if a == b
+            a == ' ' ? '   ' : a + ' '
+          elsif b == '_'
+            a + ' '
+          else
+            b + ' '
+          end
         }.join
 	end
 
@@ -48,7 +66,7 @@ class Hangman
             return "not a valid character"
         end
 
-        if letter.length > 1 
+        if letter.length > 1
             return guess_by_word(letter)
         end
 
@@ -60,7 +78,7 @@ class Hangman
             letter_to_save = letter.downcase
             unless @missed_letters.include?(letter_to_save)
                 @missed_letters << letter_to_save
-                @remaining_fail_attempts -= 1 if @remaining_fail_attempts > 0 
+                @remaining_fail_attempts -= 1 if @remaining_fail_attempts > 0
                 @game_status = :lost if @remaining_fail_attempts == 0
             end
             return "miss"
@@ -90,7 +108,7 @@ class Hangman
             word_to_save = word.downcase
             unless @missed_letters.include?(word_to_save)
                 @missed_letters << word_to_save
-                @remaining_fail_attempts -= 1 if @remaining_fail_attempts > 0 
+                @remaining_fail_attempts -= 1 if @remaining_fail_attempts > 0
                 @game_status = :lost if @remaining_fail_attempts == 0
             end
             return "miss"
