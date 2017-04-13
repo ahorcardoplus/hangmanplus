@@ -11,20 +11,24 @@ describe Hangman do
         expect(hangman.show_dashes).to eq "_ _ _ _    _ _ _ _ "
     end
 
-    it "return random phrase" do
-        hangman_game = Hangman.random_game
+    it "initialize with nil phrase it should return a random phrase" do
+      expect(RestClient::Request).to receive(:execute).and_return nil
+        hangman_game = Hangman.new
 
         expect(hangman_game.phrase).to be_kind_of(String)
         expect(hangman_game.phrase).not_to eq ""
         expect(Hangman::PHRASES).to include(hangman_game.phrase)
     end
 
-    it "initialize with nil phrase it should return a random phrase" do
+    it "uses phrases server if available" do
+      response = RestClient::Response.new('la cosa')
+      response.stub(:code) { 200 }
+      expect(RestClient::Request).to receive(:execute).and_return(response)
         hangman_game = Hangman.new
 
         expect(hangman_game.phrase).to be_kind_of(String)
-        expect(hangman_game.phrase).not_to eq ""
-        expect(Hangman::PHRASES).to include(hangman_game.phrase)
+        expect(hangman_game.phrase).to eq "la cosa"
+
     end
 
     it "receives an a and returns _ _ a _    _ _ _ _" do

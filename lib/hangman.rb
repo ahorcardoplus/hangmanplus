@@ -1,27 +1,28 @@
+require 'rest_client'
+
 class Hangman
     attr_reader :phrase
 
     PHRASES = [
-        "mas vale pajaro en mano que cien volando",
-    	"al que madruga dios lo ayuda",
-    	"no por tanto madrugar amanece mas temprano",
-    	"mas sabe el diablo por viejo que por diablo"
+        "mas vale pajaro en mano que cien volando local",
+    	"al que madruga dios lo ayuda local",
+    	"no por tanto madrugar amanece mas temprano local",
+    	"mas sabe el diablo por viejo que por diablo local"
     ]
 
     ACCENTS = {"á" => "a", "Á" => "a", "é" => "e", "É" => "e", "í" => "i", "Í" => "i", "ó" => "o", "Ó" => "o", "Ú" => "u", "ú" => "u"}
     PLACEHOLDER = '_'
 
-    def self.random_game
-    	phrase_index = rand(PHRASES.length()-1)
-    	self.new PHRASES[phrase_index]
-    end
-
 	def initialize phrase = nil
         if phrase.nil?
             phrase_index = rand(PHRASES.length()-1)
             @phrase = PHRASES[phrase_index]
+
+            r = RestClient::Request.execute(method: :get, url:'http://localhost:8081/phrases/random', timeout: 5) rescue nil
+            puts r
+            @phrase = r.body if r &&  r.code == 200
         else
-		  @phrase = phrase
+          @phrase = phrase
         end
         @correct_guesses = []
         @correct_guesses_by_word = []
