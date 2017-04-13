@@ -8,3 +8,8 @@ end
 
 enable :sessions
 set :session_secret, 'thisIsAKleerSecret'
+
+
+ENV['PHRASES_HOST'] = ENV.fetch('PHRASES_SERVICE_PORT_8081_TCP_ADDR', 'localhost')
+ENV['PHRASES_PORT'] = ENV.fetch('PHRASES_SERVICE_PORT_8081_TCP_PORT', '8081')
+
