@@ -18,8 +18,8 @@ class Hangman
             phrase_index = rand(PHRASES.length()-1)
             @phrase = PHRASES[phrase_index]
 
-            r = RestClient::Request.execute(method: :get, url:'http://localhost:8081/phrases/random', timeout: 5) rescue nil
-            puts r
+            url = "http://#{ENV['PHRASES_HOST']}:#{ENV['PHRASES_PORT']}/phrases/random"
+            r = RestClient::Request.execute(method: :get, url: url, timeout: 5) rescue nil
             @phrase = r.body if r &&  r.code == 200
         else
           @phrase = phrase
